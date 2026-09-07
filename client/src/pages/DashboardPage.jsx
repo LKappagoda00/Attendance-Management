@@ -25,31 +25,52 @@ export default function DashboardPage() {
   const dashboard = useMemo(() => dashboards[user?.role] || dashboards.employee, [user]);
 
   return (
-    <section className="panel dashboard-grid">
-      <div>
-        <p className="eyebrow">Role aware access</p>
-        <h1>{dashboard.title}</h1>
-        <p className="lead">{dashboard.description}</p>
+    <section className="dashboard-board">
+      <div className="dashboard-header">
+        <div>
+          <p className="eyebrow">{dashboard.title}</p>
+          <h2>{dashboard.description}</h2>
+        </div>
+        <div className="date-pill">2026-09</div>
       </div>
+
       <div className="metric-grid">
-        {dashboard.metrics.map((item) => (
-          <article key={item} className="metric-card">
-            {item}
-          </article>
-        ))}
+        <article className="metric-card">
+          <span className="metric-label">Employees</span>
+          <strong className="metric-value">3</strong>
+        </article>
+        <article className="metric-card">
+          <span className="metric-label">Total hours</span>
+          <strong className="metric-value accent-value">48.0h</strong>
+        </article>
+        <article className="metric-card">
+          <span className="metric-label">Total overtime</span>
+          <strong className="metric-value muted-value">0.0h</strong>
+        </article>
+        <article className="metric-card">
+          <span className="metric-label">Payroll cost</span>
+          <strong className="metric-value payroll-value">Rs. 105,000</strong>
+        </article>
       </div>
-      <div className="profile-summary">
-        <div>
-          <span className="label">Username</span>
-          <strong>{user?.username}</strong>
-        </div>
-        <div>
-          <span className="label">Role</span>
-          <strong>{user?.role}</strong>
-        </div>
-        <div>
-          <span className="label">Password status</span>
-          <strong>{user?.forcePasswordChange ? 'Reset required' : 'Active'}</strong>
+
+      <div className="bar-panel">
+        <div className="bar-panel-header">Hours worked by employee</div>
+        <div className="bar-list">
+          <div className="bar-row">
+            <span>Navodya Manamend...</span>
+            <div className="bar-track"><div className="bar-fill fill-48" /></div>
+            <strong>48.0h</strong>
+          </div>
+          <div className="bar-row">
+            <span>Kasun Perera</span>
+            <div className="bar-track"><div className="bar-fill fill-0" /></div>
+            <strong>0.0h</strong>
+          </div>
+          <div className="bar-row">
+            <span>Dilani Fernando</span>
+            <div className="bar-track"><div className="bar-fill fill-0" /></div>
+            <strong>0.0h</strong>
+          </div>
         </div>
       </div>
     </section>

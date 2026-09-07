@@ -13,30 +13,40 @@ export default function AppShell() {
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <div>
-          <p className="eyebrow">Attendance Management</p>
-          <h1>Access Control</h1>
+        <div className="sidebar-top">
+          <div className="brand-row">
+            <span className="brand-icon">◫</span>
+            <span className="brand-name">ShiftLedger</span>
+          </div>
+          <nav className="nav-links">
+            <NavLink to="/dashboard" end>
+              Overview
+            </NavLink>
+            <NavLink to="/profile">Employees</NavLink>
+            {user?.role === 'admin' ? <NavLink to="/register">Payroll</NavLink> : null}
+            <NavLink to="/change-password">Settings</NavLink>
+          </nav>
         </div>
-        <nav className="nav-links">
-          <NavLink to="/dashboard" end>
-            Dashboard
-          </NavLink>
-          <NavLink to="/profile">Profile</NavLink>
-          {user?.role === 'admin' ? <NavLink to="/register">Register Users</NavLink> : null}
-        </nav>
-        <button className="button button-ghost" onClick={handleLogout} type="button">
-          Sign out
-        </button>
+
+        <div className="sidebar-user">
+          <div className="user-badge">{(user?.fullName || user?.username || 'Admin').charAt(0).toUpperCase()}</div>
+          <div className="user-meta">
+            <strong>{user?.fullName || user?.username || 'Admin User'}</strong>
+            <span>{user?.email || 'admin@company.lk'}</span>
+          </div>
+          <button className="button button-ghost text-button" onClick={handleLogout} type="button">
+            Log out
+          </button>
+        </div>
       </aside>
+
       <main className="content">
         <header className="topbar">
-          <div>
-            <p className="eyebrow">Signed in as</p>
-            <strong>{user?.fullName || user?.username || 'Guest'}</strong>
+          <div className="topbar-title-block">
+            <p className="eyebrow">Company overview</p>
+            <h1>Attendance and payroll across the whole team.</h1>
           </div>
-          <Link className="button" to="/change-password">
-            Change password
-          </Link>
+          <div className="topbar-pill">2026-09</div>
         </header>
         <Outlet />
       </main>

@@ -4,7 +4,7 @@ export default function ProfilePage() {
   const { user } = useAuth();
 
   return (
-    <section className="panel">
+    <section className="profile-panel panel">
       <div className="panel-head">
         <div>
           <p className="eyebrow">Current user</p>
